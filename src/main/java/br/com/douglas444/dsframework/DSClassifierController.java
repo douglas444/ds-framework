@@ -12,12 +12,8 @@ public interface DSClassifierController {
      * @param point the point that the label will be predicted.
      * @return the predicted label or empty if the label could not be predicted.
      */
-    Optional<Double> predictAndUpdate(Point point);
+    public Optional<Double> predictAndUpdate(Point point);
 
-    /** Returns the accuracy of the current model.
-     *
-     * @return the accuracy of the current model.
-     */
-    double getAccuracy();
+    public String getLog();
 
 }
