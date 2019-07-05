@@ -39,7 +39,7 @@ public class DSFileReader {
 
         line = bufferedReaderLabel.readLine();
 
-        double y = Double.parseDouble(line);
+        int y = Integer.parseInt(line);
 
         return new Point(x, y);
     }

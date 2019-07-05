@@ -12,7 +12,7 @@ public interface DSClassifierController {
      * @param point the point that the label will be predicted.
      * @return the predicted label or empty if the label could not be predicted.
      */
-    public Optional<Double> predictAndUpdate(Point point);
+    public Optional<Integer> predictAndUpdate(Point point);
 
     public String getLog();
 
