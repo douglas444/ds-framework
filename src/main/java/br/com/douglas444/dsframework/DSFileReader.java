@@ -1,6 +1,6 @@
 package br.com.douglas444.dsframework;
 
-import br.com.douglas444.mltk.Point;
+import br.com.douglas444.mltk.Sample;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -32,11 +32,11 @@ public class DSFileReader {
 
     }
 
-    /** Reads the next point of the stream.
+    /** Reads the next sample of the stream.
      *
-     * @return the next point of the stream.
+     * @return the next sample of the stream.
      */
-    public Point next() throws IOException, NumberFormatException {
+    public Sample next() throws IOException, NumberFormatException {
 
         String line = bufferedReaderData.readLine();
 
@@ -59,22 +59,22 @@ public class DSFileReader {
         int y;
         if (usingSeparatedFiles) {
             line = bufferedReaderLabel.readLine();
-            y = Integer.parseInt(line);
+            y = (int) Double.parseDouble(line);
         } else {
-            y = Integer.parseInt(splittedLine[splittedLine.length - 1]);
+            y = (int) Double.parseDouble(splittedLine[splittedLine.length - 1]);
         }
 
-        return new Point(x, y);
+        return new Sample(x, y);
     }
 
 
-    public List<Point> next(int n) throws IOException, NumberFormatException {
+    public List<Sample> next(int n) throws IOException, NumberFormatException {
 
-        List<Point> points = new ArrayList<>();
+        List<Sample> samples = new ArrayList<>();
         for (int i = 0; i < n; ++i) {
-            points.add(next());
+            samples.add(next());
         }
-        return points;
+        return samples;
 
     }
 
