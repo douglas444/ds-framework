@@ -6,23 +6,24 @@ import java.io.IOException;
 
 public class DSRunnable {
 
-    public static void run(DSClassifierController dsClassifierController, DSFileReader dsFileReader, boolean activeLogger, int loggerTimestampInterval) throws IOException {
+    public static void run(DSClassifierController dsClassifierController, DSFileReader dsFileReader, boolean enableLogger, int loggerTimestampInterval) throws IOException {
 
         Sample sample;
         int timestamp = 0;
+
 
         while ((sample = dsFileReader.next()) != null) {
 
             sample.setT(timestamp++);
             dsClassifierController.predictAndUpdate(sample);
 
-            if (activeLogger && loggerTimestampInterval > 0 && timestamp % loggerTimestampInterval == 0) {
+            if (enableLogger && loggerTimestampInterval > 0 && timestamp % loggerTimestampInterval == 0) {
                 System.out.println(dsClassifierController.getLog());
             }
 
         }
 
-        if (activeLogger) {
+        if (enableLogger) {
             System.out.println(dsClassifierController.getLog());
         }
     }
