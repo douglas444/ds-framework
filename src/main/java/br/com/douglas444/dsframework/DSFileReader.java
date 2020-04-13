@@ -49,8 +49,8 @@ public class DSFileReader {
         }
 
         String[] splittedLine = line.split(this.separator);
-        double[] x = new double[splittedLine.length];
-        int numberOfFeatures = usingSeparatedFiles ? splittedLine.length - 1 : splittedLine.length;
+        int numberOfFeatures = usingSeparatedFiles ? splittedLine.length : splittedLine.length - 1;
+        double[] x = new double[numberOfFeatures];
 
         for (int i = 0; i < numberOfFeatures; ++i) {
             x[i] = Double.parseDouble(splittedLine[i]);
