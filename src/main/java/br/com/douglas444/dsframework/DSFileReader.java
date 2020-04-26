@@ -1,6 +1,6 @@
 package br.com.douglas444.dsframework;
 
-import br.com.douglas444.mltk.Sample;
+import br.com.douglas444.mltk.datastructure.Sample;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,12 +15,12 @@ public class DSFileReader {
     private BufferedReader bufferedReaderLabel;
     private boolean usingSeparatedFiles;
 
-    public DSFileReader(String separator, Reader dataReader, Reader classReader) {
+    public DSFileReader(String separator, Reader dataReader, Reader labelReader) {
 
         this.usingSeparatedFiles = true;
         this.separator = separator;
         this.bufferedReaderData = new BufferedReader(dataReader);
-        this.bufferedReaderLabel = new BufferedReader(classReader);
+        this.bufferedReaderLabel = new BufferedReader(labelReader);
 
     }
 
@@ -49,7 +49,7 @@ public class DSFileReader {
         }
 
         String[] splittedLine = line.split(this.separator);
-        int numberOfFeatures = usingSeparatedFiles ? splittedLine.length : splittedLine.length - 1;
+        final int numberOfFeatures = usingSeparatedFiles ? splittedLine.length : splittedLine.length - 1;
         double[] x = new double[numberOfFeatures];
 
         for (int i = 0; i < numberOfFeatures; ++i) {
@@ -70,7 +70,7 @@ public class DSFileReader {
 
     public List<Sample> next(int n) throws IOException, NumberFormatException {
 
-        List<Sample> samples = new ArrayList<>();
+        final List<Sample> samples = new ArrayList<>();
         for (int i = 0; i < n; ++i) {
             samples.add(next());
         }
