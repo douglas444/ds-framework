@@ -10,10 +10,10 @@ import java.util.List;
 
 public class DSFileReader {
 
-    private String separator;
-    private BufferedReader bufferedReaderData;
-    private BufferedReader bufferedReaderLabel;
-    private boolean usingSeparatedFiles;
+    private final String separator;
+    private final BufferedReader bufferedReaderData;
+    private final BufferedReader bufferedReaderLabel;
+    private final boolean usingSeparatedFiles;
 
     public DSFileReader(String separator, Reader dataReader, Reader labelReader) {
 
@@ -29,13 +29,10 @@ public class DSFileReader {
         this.usingSeparatedFiles = false;
         this.separator = separator;
         this.bufferedReaderData = new BufferedReader(reader);
+        this.bufferedReaderLabel = null;
 
     }
 
-    /** Reads the next sample of the stream.
-     *
-     * @return the next sample of the stream.
-     */
     public Sample next() throws IOException, NumberFormatException {
 
         String line = bufferedReaderData.readLine();
@@ -48,15 +45,15 @@ public class DSFileReader {
             return null;
         }
 
-        String[] splittedLine = line.split(this.separator);
+        final String[] splittedLine = line.split(this.separator);
         final int numberOfFeatures = usingSeparatedFiles ? splittedLine.length : splittedLine.length - 1;
-        double[] x = new double[numberOfFeatures];
+        final double[] x = new double[numberOfFeatures];
 
         for (int i = 0; i < numberOfFeatures; ++i) {
             x[i] = Double.parseDouble(splittedLine[i]);
         }
 
-        int y;
+        final int y;
         if (usingSeparatedFiles) {
             line = bufferedReaderLabel.readLine();
             y = (int) Double.parseDouble(line);
@@ -68,7 +65,7 @@ public class DSFileReader {
     }
 
 
-    public List<Sample> next(int n) throws IOException, NumberFormatException {
+    public List<Sample> next(final int n) throws IOException, NumberFormatException {
 
         final List<Sample> samples = new ArrayList<>();
         for (int i = 0; i < n; ++i) {
