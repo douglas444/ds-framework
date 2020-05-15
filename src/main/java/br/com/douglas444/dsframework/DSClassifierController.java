@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public interface DSClassifierController {
 
-    Optional<Integer> predictAndUpdate(final Sample sample);
+    Optional<Integer> process(final Sample sample);
 
     String getLog();
 
