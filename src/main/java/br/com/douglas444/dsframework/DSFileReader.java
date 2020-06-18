@@ -35,18 +35,21 @@ public class DSFileReader {
 
     public Sample next() throws IOException, NumberFormatException {
 
-        String line = bufferedReaderData.readLine();
+        String line = this.bufferedReaderData.readLine();
 
         if (line == null) {
-            bufferedReaderData.close();
-            if (usingSeparatedFiles) {
-                bufferedReaderLabel.close();
+            this.bufferedReaderData.close();
+
+            if (this.usingSeparatedFiles) {
+                assert this.bufferedReaderLabel != null;
+                this.bufferedReaderLabel.close();
             }
+
             return null;
         }
 
         final String[] splittedLine = line.split(this.separator);
-        final int numberOfFeatures = usingSeparatedFiles ? splittedLine.length : splittedLine.length - 1;
+        final int numberOfFeatures = this.usingSeparatedFiles ? splittedLine.length : splittedLine.length - 1;
         final double[] x = new double[numberOfFeatures];
 
         for (int i = 0; i < numberOfFeatures; ++i) {
@@ -54,9 +57,13 @@ public class DSFileReader {
         }
 
         final int y;
-        if (usingSeparatedFiles) {
-            line = bufferedReaderLabel.readLine();
+
+        if (this.usingSeparatedFiles) {
+
+            assert this.bufferedReaderLabel != null;
+            line = this.bufferedReaderLabel.readLine();
             y = (int) Double.parseDouble(line);
+
         } else {
             y = (int) Double.parseDouble(splittedLine[splittedLine.length - 1]);
         }
