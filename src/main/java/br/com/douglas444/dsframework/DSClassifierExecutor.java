@@ -7,6 +7,13 @@ import java.io.IOException;
 public class DSClassifierExecutor {
 
     public static void start(final DSClassifierController dsClassifierController, final DSFileReader dsFileReader,
+                             final boolean enableClassifierLogging) throws IOException {
+
+        start(dsClassifierController, dsFileReader, enableClassifierLogging, 1);
+
+    }
+
+    public static void start(final DSClassifierController dsClassifierController, final DSFileReader dsFileReader,
                              final boolean enableClassifierLogging, final int classifierLoggingTimestampInterval)
             throws IOException {
 
