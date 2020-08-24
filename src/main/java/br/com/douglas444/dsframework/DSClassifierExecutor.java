@@ -3,38 +3,35 @@ package br.com.douglas444.dsframework;
 import br.com.douglas444.mltk.datastructure.Sample;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DSClassifierExecutor {
 
-    public static void start(final DSClassifierController dsClassifierController, final DSFileReader dsFileReader,
-                             final boolean enableClassifierLogging) throws IOException {
-
-        start(dsClassifierController, dsFileReader, enableClassifierLogging, 1);
-
-    }
-
-    public static void start(final DSClassifierController dsClassifierController, final DSFileReader dsFileReader,
-                             final boolean enableClassifierLogging, final int classifierLoggingTimestampInterval)
+    public static void start(final DSClassifierController dsClassifierController,
+                             final boolean enableClassifierLogging,
+                             final int classifierLoggingTimestampInterval,
+                             final DSFileReader... dsFileReader)
             throws IOException {
 
         Sample sample;
         int timestamp = 0;
 
-        while ((sample = dsFileReader.next()) != null) {
+        for (DSFileReader f : dsFileReader) {
 
-            ++timestamp;
+            while ((sample = f.next()) != null) {
+                ++timestamp;
 
-            dsClassifierController.process(sample);
+                dsClassifierController.process(sample);
 
-            if (enableClassifierLogging && classifierLoggingTimestampInterval > 0 && timestamp %
-                    classifierLoggingTimestampInterval == 0) {
+                if (enableClassifierLogging && classifierLoggingTimestampInterval > 0 && timestamp %
+                        classifierLoggingTimestampInterval == 0) {
 
-                System.out.println(dsClassifierController.getLog());
+                    System.out.println(dsClassifierController.getLog());
 
+                }
             }
-
         }
-
     }
 
 }
