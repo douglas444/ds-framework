@@ -3,42 +3,34 @@ package br.com.douglas444.dsframework;
 import br.com.douglas444.mltk.datastructure.Sample;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DSClassifierExecutor {
 
-    public static void start(final DSClassifierController dsClassifierController, final DSFileReader dsFileReader)
+    public static void start(final DSClassifierController dsClassifierController,
+                             final boolean enableClassifierLogging,
+                             final int classifierLoggingTimestampInterval,
+                             final DSFileReader... dsFileReader)
             throws IOException {
-
-        start(dsClassifierController, dsFileReader, true, 1);
-
-    }
-
-    public static void start(final DSClassifierController dsClassifierController, final DSFileReader dsFileReader,
-                             final boolean enableLogger) throws IOException {
-
-        start(dsClassifierController, dsFileReader, enableLogger, 1);
-
-    }
-
-    public static void start(final DSClassifierController dsClassifierController, final DSFileReader dsFileReader,
-                             final boolean enableLogger, final int loggerTimestampInterval) throws IOException {
 
         Sample sample;
         int timestamp = 0;
 
-        while ((sample = dsFileReader.next()) != null) {
+        for (DSFileReader f : dsFileReader) {
 
-            sample.setT(timestamp++);
-            dsClassifierController.predictAndUpdate(sample);
+            while ((sample = f.next()) != null) {
+                ++timestamp;
 
-            if (enableLogger && loggerTimestampInterval > 0 && timestamp % loggerTimestampInterval == 0) {
-                System.out.println(dsClassifierController.getLog());
+                dsClassifierController.process(sample);
+
+                if (enableClassifierLogging && classifierLoggingTimestampInterval > 0 && timestamp %
+                        classifierLoggingTimestampInterval == 0) {
+
+                    System.out.println(dsClassifierController.getLog());
+
+                }
             }
-
-        }
-
-        if (enableLogger) {
-            System.out.println(dsClassifierController.getLog());
         }
     }
 
