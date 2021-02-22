@@ -8,18 +8,27 @@ import java.util.List;
 
 public class DSClassifierExecutor {
 
-    public static void start(final DSClassifierController dsClassifierController,
-                             final boolean enableClassifierLogging,
-                             final int classifierLoggingTimestampInterval,
-                             final DSFileReader... dsFileReader)
+    private boolean alive;
+
+    public DSClassifierExecutor() {
+        this.alive = false;
+    }
+
+    public void interrupt() {
+        this.alive = false;
+    }
+
+    public boolean start(final DSClassifierController dsClassifierController, final boolean enableClassifierLogging,
+                      final int classifierLoggingTimestampInterval, final DSFileReader... dsFileReader)
             throws IOException {
 
+        this.alive = true;
         Sample sample;
         int timestamp = 0;
 
         for (DSFileReader f : dsFileReader) {
 
-            while ((sample = f.next()) != null) {
+            while (this.alive && (sample = f.next()) != null) {
                 ++timestamp;
 
                 dsClassifierController.process(sample);
@@ -32,6 +41,8 @@ public class DSClassifierExecutor {
                 }
             }
         }
+
+        return alive;
     }
 
 }
