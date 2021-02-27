@@ -18,8 +18,11 @@ public class DSClassifierExecutor {
         this.alive = false;
     }
 
-    public boolean start(final DSClassifierController dsClassifierController, final boolean enableClassifierLogging,
-                      final int classifierLoggingTimestampInterval, final DSFileReader... dsFileReader)
+    public boolean start(final DSClassifierController dsClassifierController,
+                         final DSFileReader... dsFileReader) throws IOException {
+        return start(dsClassifierController, 0, dsFileReader);
+    }
+    public boolean start(final DSClassifierController dsClassifierController, final int classifierLoggingTimestampInterval, final DSFileReader... dsFileReader)
             throws IOException {
 
         this.alive = true;
@@ -27,17 +30,11 @@ public class DSClassifierExecutor {
         int timestamp = 0;
 
         for (DSFileReader f : dsFileReader) {
-
             while (this.alive && (sample = f.next()) != null) {
                 ++timestamp;
-
                 dsClassifierController.process(sample);
-
-                if (enableClassifierLogging && classifierLoggingTimestampInterval > 0 && timestamp %
-                        classifierLoggingTimestampInterval == 0) {
-
+                if (classifierLoggingTimestampInterval > 0 && timestamp % classifierLoggingTimestampInterval == 0) {
                     System.out.println(dsClassifierController.getLog());
-
                 }
             }
         }
