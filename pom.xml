@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>br.com.douglas444</groupId>
-    <artifactId>ds-framework</artifactId>
+    <artifactId>streams</artifactId>
     <version>1.2-SNAPSHOT</version>
 
     <properties>
@@ -12,11 +12,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>br.com.douglas444</groupId>
-            <artifactId>mltk</artifactId>
-            <version>1.1</version>
-        </dependency>
     </dependencies>
 
     <build>

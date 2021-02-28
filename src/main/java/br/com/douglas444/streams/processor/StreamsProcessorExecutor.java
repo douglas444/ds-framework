@@ -1,6 +1,7 @@
-package br.com.douglas444.dsframework;
+package br.com.douglas444.streams.processor;
 
-import br.com.douglas444.mltk.datastructure.Sample;
+import br.com.douglas444.streams.StreamsFileReader;
+import br.com.douglas444.streams.datastructures.Sample;
 
 import java.io.IOException;
 

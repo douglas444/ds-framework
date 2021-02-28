@@ -1,6 +1,6 @@
-package br.com.douglas444.dsframework;
+package br.com.douglas444.streams;
 
-import br.com.douglas444.mltk.datastructure.Sample;
+import br.com.douglas444.streams.datastructures.Sample;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -88,7 +88,6 @@ public class StreamsFileReader {
         }
 
     }
-
 
     public List<Sample> next(final int n) throws IOException, NumberFormatException {
 
