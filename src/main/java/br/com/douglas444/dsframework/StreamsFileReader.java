@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class DSFileReader {
+public class StreamsFileReader {
 
     private final String separator;
     private final BufferedReader bufferedReaderData;
@@ -18,7 +18,9 @@ public class DSFileReader {
     private Boolean labelIsNaN;
     private HashMap<String, Integer> labelEnumeration;
 
-    public DSFileReader(String separator, Reader dataReader, Reader labelReader) {
+    public StreamsFileReader(final String separator,
+                             final Reader dataReader,
+                             final Reader labelReader) {
 
         this.separator = separator;
         this.bufferedReaderData = new BufferedReader(dataReader);
@@ -26,7 +28,7 @@ public class DSFileReader {
         this.labelIsNaN = null;
     }
 
-    public DSFileReader(String separator, Reader reader) {
+    public StreamsFileReader(final String separator, final Reader reader) {
 
         this.separator = separator;
         this.bufferedReaderData = new BufferedReader(reader);
@@ -50,7 +52,10 @@ public class DSFileReader {
         }
 
         final String[] splittedLine = line.split(this.separator);
-        final int numberOfFeatures = this.bufferedReaderLabel != null ? splittedLine.length : splittedLine.length - 1;
+
+        final int numberOfFeatures = this.bufferedReaderLabel != null
+                ? splittedLine.length : splittedLine.length - 1;
+
         final double[] x = new double[numberOfFeatures];
 
         for (int i = 0; i < numberOfFeatures; ++i) {
@@ -94,7 +99,7 @@ public class DSFileReader {
         return samples;
     }
 
-    private boolean isNumeric(String str) {
+    private boolean isNumeric(final String str) {
 
         Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
         if (str == null) {
