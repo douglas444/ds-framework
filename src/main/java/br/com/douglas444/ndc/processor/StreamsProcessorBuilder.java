@@ -1,4 +1,4 @@
-package br.com.douglas444.streams.processor;
+package br.com.douglas444.ndc.processor;
 
 public interface StreamsProcessorBuilder {
 

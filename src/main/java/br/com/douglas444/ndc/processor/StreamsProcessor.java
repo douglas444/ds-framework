@@ -1,6 +1,6 @@
-package br.com.douglas444.streams.processor;
+package br.com.douglas444.ndc.processor;
 
-import br.com.douglas444.streams.datastructures.Sample;
+import br.com.douglas444.ndc.datastructures.Sample;
 
 import java.util.Optional;
 
