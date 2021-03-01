@@ -8,6 +8,7 @@ public class Sample {
     private long t;
     private double[] x;
     private Integer y;
+    private Integer id;
 
     public Sample(final int t, final double[] x, final Integer y) {
         this.t = t;
@@ -152,4 +153,12 @@ public class Sample {
         this.y = y;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public Sample setId(Integer id) {
+        this.id = id;
+        return this;
+    }
 }
