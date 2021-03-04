@@ -1,4 +1,4 @@
-package br.com.douglas444.ndc.datastructures;
+package br.com.douglas444.streams.datastructures;
 
 public interface DynamicConfusionMatrixCompatible {
 

@@ -1,4 +1,4 @@
-package br.com.douglas444.ndc.datastructures;
+package br.com.douglas444.streams.datastructures;
 
 import java.util.ArrayList;
 import java.util.Comparator;

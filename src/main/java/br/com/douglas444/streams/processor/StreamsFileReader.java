@@ -1,4 +1,4 @@
-package br.com.douglas444.streams;
+package br.com.douglas444.streams.processor;
 
 import br.com.douglas444.streams.datastructures.Sample;
 
