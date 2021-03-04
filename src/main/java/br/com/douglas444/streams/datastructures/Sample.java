@@ -9,6 +9,8 @@ public class Sample {
     private double[] x;
     private Integer y;
 
+    private Integer id;
+
     public Sample(final int t, final double[] x, final Integer y) {
         this.t = t;
         this.x = x.clone();
@@ -150,6 +152,15 @@ public class Sample {
 
     public void setY(Integer y) {
         this.y = y;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public Sample setId(Integer id) {
+        this.id = id;
+        return this;
     }
 
 }

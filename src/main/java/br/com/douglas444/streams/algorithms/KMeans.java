@@ -1,7 +1,7 @@
-package br.com.douglas444.ndc.algorithms;
+package br.com.douglas444.streams.algorithms;
 
-import br.com.douglas444.ndc.datastructures.Cluster;
-import br.com.douglas444.ndc.datastructures.Sample;
+import br.com.douglas444.streams.datastructures.Cluster;
+import br.com.douglas444.streams.datastructures.Sample;
 
 import java.util.ArrayList;
 import java.util.HashMap;

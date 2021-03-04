@@ -1,6 +1,6 @@
-package br.com.douglas444.ndc;
+package br.com.douglas444.streams.processor;
 
-import br.com.douglas444.ndc.datastructures.Sample;
+import br.com.douglas444.streams.datastructures.Sample;
 
 import java.io.BufferedReader;
 import java.io.IOException;
